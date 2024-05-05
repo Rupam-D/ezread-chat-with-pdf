@@ -1,5 +1,5 @@
 "use client"
-import { ChevronDown, ChevronUp, Loader2, RotateCcw, RotateCw, Search } from 'lucide-react';
+import { AlignLeft, AlignRight, ChevronDown, ChevronUp, Loader2, RotateCcw, RotateCw, Search } from 'lucide-react';
 import { pdfjs } from 'react-pdf';
 import { Document, Page } from 'react-pdf'
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -81,7 +81,7 @@ const PdfRenderer = ({ fileUrl }: { fileUrl: string }) => {
         </div>
 
 
-        <div className='space-x-2'>
+        <div className='hidden sm:block space-x-2'>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className='gap-1.5' aria-label='zoom in' variant={"ghost"}>
@@ -110,6 +110,44 @@ const PdfRenderer = ({ fileUrl }: { fileUrl: string }) => {
 
           {/* fullscreen */}
           <PdfFullScreen fileUrl={fileUrl} />
+        </div>
+
+        <div className='block sm:hidden space-x-2'>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <AlignRight className=' text-gray-500 h-6 w-6' />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end' className='text-center'>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className='gap-1.5' aria-label='zoom in' variant={"ghost"}>
+                    <Search className='h-4 w-4' />
+                    {scale * 100}%
+                    <ChevronDown className='h-3 w-3 opacity-50' />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onSelect={() => setScale(1)}>100%</DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => setScale(1.5)}>150%</DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => setScale(1.75)}>175%</DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => setScale(2)}>200%</DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => setScale(2.5)}>250%</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <DropdownMenuSeparator />
+              {/* fullscreen */}
+              <PdfFullScreen fileUrl={fileUrl} />
+              <DropdownMenuSeparator />
+              {/* rotate */}
+
+              <Button variant={"ghost"} aria-label='rotate 90 degree clockwise'>
+                <RotateCw className='h-4 w-4'
+                  onClick={() => {
+                    setRotate((prevState) => prevState + 90)
+                  }} />
+              </Button>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 

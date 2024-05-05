@@ -14,7 +14,7 @@ import { trpc } from '@/app/_trpc/client';
 const DashboardComp = () => {
   // fetch files
   const { data, isLoading } = trpc.getUserFiles.useQuery()
-  console.log(data, isLoading, "getUserFiles12")
+  // console.log(data, isLoading, "getUserFiles12")
 
   return (
     <main className='mx-auto max-w-7xl md:p-10'>

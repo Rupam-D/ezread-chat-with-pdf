@@ -13,7 +13,7 @@ import { FileType } from '@/types/types';
 
 
 // main comp
-const GetUserFiles = async ({ files }: { files: FileType[] }) => {
+const GetUserFiles = ({ files }: { files: FileType[] }) => {
 
   console.log(files, "getfiles")
 

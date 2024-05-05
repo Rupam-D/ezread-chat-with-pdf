@@ -4,11 +4,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { pinecone } from "@/database/pineConedb";
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { PineconeStore } from "@langchain/pinecone";
-import { File } from "@/models/fileSchema";
-import { Message } from "@/models/messageSchema";
-import { Message as MessageTypes } from "ai/react";
 import { openaiconfig } from "@/lib/openai";
-import { dbConnect } from "@/database/dbConfig";
 import { MessageBackendTypes } from "@/types/types";
 
 export async function POST(req: Request) {
@@ -62,7 +58,7 @@ export async function POST(req: Request) {
 
   // pc result
   const resultfromPc = await pcstore.similaritySearch(query, 5);
-  console.log(resultfromPc, "result from pc");
+  // console.log(resultfromPc, "result from pc");
   // await dbConnect();
   // // prev msg
   // const prevmsg = await Message.find({

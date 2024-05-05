@@ -92,7 +92,7 @@ const DropzoneModal = () => {
 
                   <UploadCloud className='h-6 w-6 text-pink-500 mb-2' />
                   <p className='mb-2 text-sm text-zinc-700 font-semibold'>
-                    Drag 'n' drop files here, <span className='font-normal'>or</span> click to select files
+                    Drag &apos;n&apos; drop files here, <span className='font-normal'>or</span> click to select files
                   </p>
                   <p className='text-xs text-zinc-500'> PDF (upto 4MB)</p>
 

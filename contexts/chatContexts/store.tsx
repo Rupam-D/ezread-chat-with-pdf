@@ -1,6 +1,5 @@
 "use client"
 
-import { sendMessage } from "@/controllers/sendMessage"
 import { ChatContextTypes } from "@/types/types"
 import { useMutation } from "@tanstack/react-query"
 import { useChat } from "ai/react"

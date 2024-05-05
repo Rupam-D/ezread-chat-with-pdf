@@ -1,18 +1,16 @@
 "use client";
+
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import MaxWidthWrapper from './MaxWidthWrapper'
 import Link from 'next/link'
 import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { ArrowRightIcon } from 'lucide-react';
 import { buttonVariants } from './ui/button';
+import UserAccount from "./User-account";
 
 const Navbar = () => {
   const {
-    permissions,
-    isLoading,
-    user
-
-  } = useKindeBrowserClient();
+    user } = useKindeBrowserClient()
 
 
   return (
@@ -30,16 +28,14 @@ const Navbar = () => {
           {/* Mobile Nav will done later */}
 
           <div className='hidden sm:flex items-center gap-x-4'>
-            <Link href={"/pricing"} className={buttonVariants({
-              variant: "ghost"
-            })}>
-              Pricing
-            </Link>
+
 
             {/* Login Logout */}
             {
               user && user !== null ?
-                <LogoutLink className={buttonVariants({ variant: "outline", size: "sm" })}>Log out</LogoutLink>
+                <UserAccount email={user.email || " "} imageUrl={user.picture || " "} name={!user.given_name || !user.family_name
+                  ? 'My Account'
+                  : `${user.given_name} ${user.family_name}`} />
                 :
                 <div className="flex items-center justify-center gap-4">
                   <LoginLink className={buttonVariants({
@@ -47,7 +43,27 @@ const Navbar = () => {
                     size: "sm",
                   })}>Sign In</LoginLink>
 
-                  <RegisterLink className={buttonVariants({ variant: 'default', size: "sm" })}>Started for Free <ArrowRightIcon className='ml-2 w-5 h-5' /></RegisterLink></div>
+                  <RegisterLink className={buttonVariants({ variant: 'default', size: "sm" })}>Started for Free <ArrowRightIcon className='ml-2 w-5 h-5' /></RegisterLink>
+                </div>
+            }
+          </div>
+
+          {/* Mobilenav */}
+          <div className='flex items-center gap-x-4 sm:hidden'>
+
+
+            {/* Login Logout */}
+            {
+              user && user !== null ?
+                <UserAccount email={user.email || " "} imageUrl={user.picture || " "} name={!user.given_name || !user.family_name
+                  ? 'My Account'
+                  : `${user.given_name} ${user.family_name}`} />
+                :
+                <div className="flex items-center justify-center gap-4">
+
+
+                  <RegisterLink className={buttonVariants({ variant: 'default', size: "sm" })}>Started for Free <ArrowRightIcon className='ml-2 w-5 h-5' /></RegisterLink>
+                </div>
             }
           </div>
 

@@ -1,10 +1,17 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ArrowRight, ArrowRightIcon, CircleUserRound, Github, MessagesSquare, Sparkles, UploadCloud } from "lucide-react";
+import { ArrowRight, ArrowRightIcon, Check, CircleUserRound, Github, HelpCircle, MessagesSquare, Minus, Sparkles, UploadCloud } from "lucide-react";
 import Link from "next/link"
 import Image from "next/image";
-import { ModeToggle } from "@/components/ThemeToggler";
-import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { pricingItems } from "@/constants/constants";
+import { PLANS } from "@/config/pricing-config";
+import { cn } from "@/lib/utils";
+import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import UpgradeButton from "@/components/UpgradeBtn";
+
+
+
 const Home = () => {
   return (
     <div className="bg-gray-50/20">
@@ -49,8 +56,8 @@ const Home = () => {
                   <Link
                     href='/'
                     target='_blank'>
-                    <Button variant={"outline"}>
-                      <Github className='mr-2 h-5 w-5' />
+                    <Button variant={"outline"} size={"default"} className="mt-5 sm:mt-0 border border-pink-500 shadow-sm ring-1 ring-pink-200">
+                      <Github className='mr-2 h-5 w-5 ' />
                       Give us a star{' '}
                     </Button>
                   </Link>
@@ -195,21 +202,11 @@ const Home = () => {
 
       {/* testimonial */}
       <section id="testimonials" aria-label="What our customers are saying" className="relative bg-gray-50 py-20  sm:mt-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="  mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl md:text-center">
             <h2 className="mt-2 font-bold text-4xl text-gray-900 sm:text-5xl">What Our Customers Are Saying</h2>
           </div>
-          <div
-            aria-hidden='true'
-            className='pointer-events-none absolute inset-x-0 top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'>
-            <div
-              style={{
-                clipPath:
-                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-              }}
-              className='relative left-[calc(50%-13rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]'
-            />
-          </div>
+
           <ul role="list"
             className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3">
             <li>
@@ -222,7 +219,7 @@ const Home = () => {
                     </path>
                   </svg>
                     <blockquote className="relative">
-                      <p className="text-lg tracking-tight text-slate-900">As a student, I found this app incredibly useful! Being able to chat with PDFs has revolutionized the way I study. No more juggling between multiple apps or windows. It's all in one place now. Thanks to this app, my productivity has soared!</p>
+                      <p className="text-lg tracking-tight text-slate-900">As a student, I found this app incredibly useful! Being able to chat with PDFs has revolutionized the way I study. No more juggling between multiple apps or windows. It&apos;s all in one place now. Thanks to this app, my productivity has soared!</p>
                     </blockquote>
                     <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                       <div>
@@ -246,7 +243,7 @@ const Home = () => {
                     </path>
                   </svg>
                     <blockquote className="relative">
-                      <p className="text-lg tracking-tight text-slate-900">I'm amazed by the simplicity and effectiveness of this app. As a professional, I deal with a lot of documents on a daily basis. This app has made collaboration so much easier. Sharing and discussing PDFs in real-time has never been smoother. Kudos to the team behind this brilliant creation!</p>
+                      <p className="text-lg tracking-tight text-slate-900">I&apos;m amazed by the simplicity and effectiveness of this app. As a professional, I deal with a lot of documents on a daily basis. This app has made collaboration so much easier. Sharing and discussing PDFs in real-time has never been smoother. Kudos to the team behind this brilliant creation!</p>
                     </blockquote>
                     <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                       <div>
@@ -270,7 +267,7 @@ const Home = () => {
                     </path>
                   </svg>
                     <blockquote className="relative">
-                      <p className="text-lg tracking-tight text-slate-900">I've tried many productivity apps, but none come close to this one. Chatting with PDFs has changed the game for me. Whether it's discussing project details with my team or reviewing documents with clients, this app has become my go-to tool. It's a must-have for anyone who deals with documents regularly</p>
+                      <p className="text-lg tracking-tight text-slate-900">I&apos;ve tried many productivity apps, but none come close to this one. Chatting with PDFs has changed the game for me. Whether it&apos;s discussing project details with my team or reviewing documents with clients, this app has become my go-to tool. It&apos;s a must-have for anyone who deals with documents regularly.</p>
                     </blockquote>
                     <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                       <div>
@@ -286,117 +283,196 @@ const Home = () => {
             </li>
           </ul>
         </div>
+        <div
+          aria-hidden='true'
+          className='pointer-events-none absolute inset-x-0 top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'>
+          <div
+            style={{
+              clipPath:
+                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+            }}
+            className='relative left-[calc(50%-13rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]'
+          />
+        </div>
       </section>
 
+
+      <MaxWidthWrapper className='relative mb-8 mt-24 text-center max-w-5xl'>
+        <div
+          aria-hidden='true'
+          className='pointer-events-none absolute inset-x-0 -top-[9rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'>
+          <div
+            style={{
+              clipPath:
+                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+            }}
+            className='relative left-[calc(50%-13rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]'
+          />
+        </div>
+        <div className='mx-auto mb-10 sm:max-w-lg'>
+          <h1 className='text-6xl font-bold sm:text-7xl  '>
+            Pricing
+          </h1>
+          <p className='mt-5 text-gray-600 sm:text-lg'>
+            Whether you&apos;re just trying out our service
+            or need more, we&apos;ve got you covered.
+          </p>
+        </div>
+
+        <div className='pt-12 grid grid-cols-1 gap-10 lg:grid-cols-2'>
+          <TooltipProvider>
+            {pricingItems.map(
+              ({ plan, tagline, quota, features }) => {
+                const price =
+                  PLANS.find(
+                    (p) => p.slug === plan.toLowerCase()
+                  )?.price.amount || 0
+
+                return (
+                  <div
+                    key={plan}
+                    className={cn(
+                      'relative rounded-2xl bg-white shadow-lg',
+                      {
+                        'border-2 border-pink-600 shadow-pink-200':
+                          plan === 'Pro',
+                        'border border-gray-200':
+                          plan !== 'Pro',
+                      }
+                    )}>
+                    {plan === 'Pro' && (
+                      <div className='absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-pink-600 to-red-600 px-3 py-2 text-sm font-medium text-white'>
+                        Upgrade now
+                      </div>
+                    )}
+
+                    <div className='p-5'>
+                      <h3 className='my-3 text-center font-display text-3xl font-bold'>
+                        {plan}
+                      </h3>
+                      <p className='text-gray-500'>
+                        {tagline}
+                      </p>
+                      <p className='my-5 font-display text-6xl font-semibold'>
+                        ${price}
+                      </p>
+                      <p className='text-gray-500'>
+                        per month
+                      </p>
+                    </div>
+
+                    <div className='flex h-20 items-center justify-center border-b border-t border-gray-200 bg-gray-50'>
+                      <div className='flex items-center space-x-1'>
+                        <p>
+                          {quota.toLocaleString()} PDFs/mo
+                          included
+                        </p>
+
+                        <Tooltip delayDuration={300}>
+                          <TooltipTrigger className='cursor-default ml-1.5'>
+                            <HelpCircle className='h-4 w-4 text-zinc-500' />
+                          </TooltipTrigger>
+                          <TooltipContent className='w-80 p-2'>
+                            How many PDFs you can upload per
+                            month.
+                          </TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </div>
+
+                    <ul className='my-10 space-y-5 px-8'>
+                      {features.map(
+                        ({ text, footnote, negative }) => (
+                          <li
+                            key={text}
+                            className='flex space-x-5'>
+                            <div className='flex-shrink-0'>
+                              {negative ? (
+                                <Minus className='h-6 w-6 text-gray-300' />
+                              ) : (
+                                <Check className='h-6 w-6 text-pink-500' />
+                              )}
+                            </div>
+                            {footnote ? (
+                              <div className='flex items-center space-x-1'>
+                                <p
+                                  className={cn(
+                                    'text-gray-600',
+                                    {
+                                      'text-gray-400':
+                                        negative,
+                                    }
+                                  )}>
+                                  {text}
+                                </p>
+                                <Tooltip
+                                  delayDuration={300}>
+                                  <TooltipTrigger className='cursor-default ml-1.5'>
+                                    <HelpCircle className='h-4 w-4 text-zinc-500' />
+                                  </TooltipTrigger>
+                                  <TooltipContent className='w-80 p-2'>
+                                    {footnote}
+                                  </TooltipContent>
+                                </Tooltip>
+                              </div>
+                            ) : (
+                              <p
+                                className={cn(
+                                  'text-gray-600',
+                                  {
+                                    'text-gray-400':
+                                      negative,
+                                  }
+                                )}>
+                                {text}
+                              </p>
+                            )}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                    <div className='border-t border-gray-200' />
+                    {/* <Link href={"/pricing"}
+                      className={buttonVariants({
+                        className: 'w-full',
+                      })}>
+                      "Upgrade now"
+                      <ArrowRight className='h-5 w-5 ml-1.5' />
+                    </Link> */}
+                    <div className='p-5'>
+                      {plan === 'Free' ?
+                        <Button className="w-full " variant={"outline"}>
+                          <RegisterLink >
+                            Register today
+                            <ArrowRight className='h-5 w-5 ml-1.5' />
+                          </RegisterLink>
+                        </Button>
+
+                        :
+                        <UpgradeButton />
+                      }
+                    </div>
+                  </div>
+                )
+              }
+            )}
+          </TooltipProvider>
+        </div>
+      </MaxWidthWrapper>
       {/* footer */}
-      <footer className="flex flex-row w-full py-5 px-7 bg-[#E4335A] text-white text-sm items-center justify-between ">
+      <footer className="flex flex-col sm:flex-row w-full py-5 px-7 bg-[#E4335A] text-white text-sm items-center justify-between ">
         <div>
           <p className=""><span className="font-bold">EzRead</span> - Developed by Rupam Das</p>
           <p className="text-white/90 text-sm block mt-1">Take 3 sleepless months to make it happen :D</p>
         </div>
 
         <div>
-          <p className="text-white text-sm mt-3">Kudos to teams Pranay, Rito, Pritam & Koustav</p>
+          <p className="sm:mt-3 text-white text-sm ">Special thanks to Pranay, Rito, Pritam & Koustav</p>
         </div>
 
 
       </footer>
-      {/* <footer>
-        <div className="bg-gray-800 py-4 text-gray-400">
-          <div className="container px-4 mx-auto">
-            <div className="-mx-4 flex flex-wrap justify-between">
-              <div className="px-4 my-4 w-full xl:w-1/5">
-                <a href="/" className="block w-56 mb-10">
-                  <svg version="1.1" viewBox="0 0 3368 512" xmlns="http://www.w3.org/2000/svg">
-                    <g fill="none" fill-rule="evenodd">
-                      <g transform="translate(0 -75)">
-                        <g transform="translate(0 75)">
-                          <rect width="512" height="512" rx="128" fill="#3D5AFE"></rect>
-                          <rect x="149" y="176" width="220" height="220" fill="#fff"></rect>
-                          <circle cx="259" cy="156" r="40" fill="#fff"></circle>
-                          <circle cx="369" cy="286" r="40" fill="#2962FF"></circle>
-                        </g>
-                        <text fill="white" font-family="Nunito-Bold, Nunito" font-size="512" font-weight="bold">
-                          <tspan x="654" y="518">Tailwindow</tspan>
-                        </text>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
-                <p className="text-justify">
-                  Tailwindow is a collection of UI Components created using Tailwind CSS Framework. The UI Components gives you all of the building blocks you need to build any designs without any annoying opinionated styles you have to fight to override.
-                </p>
-              </div>
 
-              <div className="px-4 my-4 w-full sm:w-auto">
-                <div>
-                  <h2 className="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Company</h2>
-                </div>
-                <ul className="leading-8">
-                  <li><a href="#" className="hover:text-blue-400">About Us</a></li>
-                  <li><a href="#" className="hover:text-blue-400">Terms &amp; Conditions</a></li>
-                  <li><a href="#" className="hover:text-blue-400">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-blue-400">Contact Us</a></li>
-                </ul>
-              </div>
-              <div className="px-4 my-4 w-full sm:w-auto">
-                <div>
-                  <h2 className="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Blog</h2>
-                </div>
-                <ul className="leading-8">
-                  <li><a href="#" className="hover:text-blue-400">Getting Started With HTML and CSS</a></li>
-                  <li><a href="#" className="hover:text-blue-400">What Is Flex And When to Use It?</a></li>
-                  <li><a href="#" className="hover:text-blue-400">How TailwindCSS Can Help Your Productivity?</a></li>
-                  <li><a href="#" className="hover:text-blue-400">5 Tips to Make Responsive Website</a></li>
-                  <li><a href="#" className="hover:text-blue-400">See More</a></li>
-                </ul>
-              </div>
-              <div className="px-4 my-4 w-full sm:w-auto xl:w-1/5">
-                <div>
-                  <h2 className="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Connect With Us</h2>
-                </div>
-                <a href="#" className="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
-                  <svg className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                    <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
-                  </svg>
-                </a>
-                <a href="#" className="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
-                  <svg className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
-                  </svg>
-                </a>
-                <a href="#" className="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
-                  <svg className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                    <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
-                  </svg>
-                </a>
-                <a href="#" className="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
-                  <svg className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-                    <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
-                  </svg>
-                </a>
-                <a href="#" className="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full hover:text-blue-400 hover:border-blue-400">
-                  <svg className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                    <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="bg-indigo-700 py-4 text-gray-100">
-          <div className="container mx-auto px-4">
-            <div className="-mx-4 flex flex-wrap justify-between">
-              <div className="px-4 w-full text-center sm:w-auto sm:text-left">
-                © 2024
-              </div>
-              <div className="px-4 w-full text-center sm:w-auto sm:text-left">
-                Developed by Rupam Das
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer> */}
 
 
     </div>
