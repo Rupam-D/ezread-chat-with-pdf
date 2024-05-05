@@ -9,7 +9,7 @@ const TrpcProvider = ({ children }: PropsWithChildren) => {
   const [queryClient] = useState(() => new QueryClient)
   const [trpcClient] = useState(() =>
     trpc.createClient({
-      links: [httpBatchLink({ url: `http://localhost:3000/api/trpc` })]
+      links: [httpBatchLink({ url: `https://ezread-chat-with-pdf.vercel.app/api/trpc` })]
     }))
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
