@@ -20,7 +20,7 @@ const DeletefileBtn = ({ fileId }: {
 
   const { mutate: deleteTheFile } = trpc.deleteUserFile.useMutation({
     onSuccess: () => {
-      utils.getUSerFiles.invalidate()
+      utils.getUserFiles.invalidate()
     },
     onMutate: ({ fileId }) => {
       setDeleteFileId(fileId)
