@@ -16,13 +16,25 @@ const Home = () => {
   return (
     <div className="bg-gray-50/20">
       <div className="relative bg-gray-50">
-        <div className="absolute bottom-0 right-0 overflow-hidden lg:inset-y-0">
+
+        {/* <div className="absolute bottom-0 right-0 overflow-hidden lg:inset-y-0">
           <img className="w-auto h-full" src="https://d33wubrfki0l68.cloudfront.net/1e0fc04f38f5896d10ff66824a62e466839567f8/699b5/images/hero/3/background-pattern.png" alt="" />
-        </div>
+        </div> */}
 
 
 
         <section className=" py-12 sm:py-16 lg:pt-20 lg:pb-36">
+          {/* <div
+            aria-hidden='true'
+            className='pointer-events-none absolute inset-x-0 top-1 -z-10 transform-gpu overflow-hidden  '>
+            <div
+              style={{
+                clipPath:
+                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+              }}
+              className='relative left-[calc(50%-13rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]'
+            />
+          </div> */}
 
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="grid grid-cols-1 gap-y-8 lg:items-center lg:grid-cols-2 sm:gap-y-20 xl:grid-cols-5">
@@ -74,15 +86,88 @@ const Home = () => {
                 className='rounded-md bg-white p-2 sm:p-8 md:p-20 shadow-2xl ring-1 ring-gray-900/10'
               /> */}
 
-                <img className="w-[87%] mx-auto scale-110 rounded-md bg-white p-2  shadow-md ring-1 ring-pink-900/10" src="/assets/dashboard-preview.png" alt="" />
+                <img className="w-[87%] mx-auto scale-110 rounded-md bg-white p-2  shadow-lg shadow-pink-600/10 ring-1 ring-pink-900/10" src="/assets/dashboard-preview.png" alt="" />
 
 
               </div>
+
+
             </div>
           </div>
+
+        </section>
+      </div>
+
+
+      {/* Feature section */}
+      <MaxWidthWrapper>
+        <div className='relative mx-auto mb-32 mt-32 max-w-5xl sm:mt-28'>
+          <div className='mb-12 px-6 lg:px-8'>
+            <div className='mx-auto max-w-2xl sm:text-center'>
+              <h2 className='mt-2 font-bold text-4xl text-gray-900 sm:text-5xl'>
+                Start chatting in minutes !
+              </h2>
+              <p className='mt-4 text-lg text-gray-600'>
+                Chatting to your PDF files has never been
+                easier than before.
+              </p>
+            </div>
+          </div>
+
+          {/* steps */}
+          <ol className='my-8 space-y-4 pt-8 md:flex md:space-x-12 md:space-y-0'>
+            <li className='md:flex-1'>
+              <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
+                <span className='bg-pink-100 text-pink-600 p-3 cursor-pointer w-fit rounded-xl'>
+                  <CircleUserRound className='h-8 w-8' />
+                </span>
+                <span className='text-xl font-semibold'>
+                  Sign up for an account
+                </span>
+                <span className='mt-2 text-zinc-700'>
+                  Either starting out with a free plan or
+                  choose our{' '}
+                  <Link
+                    href='/pricing'
+                    className='text-pink-700 underline underline-offset-2'>
+                    pro plan
+                  </Link>
+                  .
+                </span>
+              </div>
+            </li>
+            <li className='md:flex-1'>
+              <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
+                <span className='bg-pink-100 text-pink-600 p-3 cursor-pointer w-fit rounded-xl'>
+                  <UploadCloud className='h-8 w-8' />
+                </span>
+                <span className='text-xl font-semibold'>
+                  Upload your PDF file
+                </span>
+                <span className='mt-2 text-zinc-700'>
+                  We&apos;ll process your file and make it
+                  ready for you to chat with.
+                </span>
+              </div>
+            </li>
+            <li className='md:flex-1'>
+              <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
+                <span className='bg-pink-100 text-pink-600 p-3 cursor-pointer w-fit rounded-xl'>
+                  <MessagesSquare className='h-8 w-8' />
+                </span>
+                <span className='text-xl font-semibold'>
+                  Start asking questions
+                </span>
+                <span className='mt-2 text-zinc-700'>
+                  It&apos;s that simple. Try out EzRead today -
+                  it really takes less than a minute.
+                </span>
+              </div>
+            </li>
+          </ol>
           <div
             aria-hidden='true'
-            className='pointer-events-none absolute inset-x-0 top-80 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'>
+            className='pointer-events-none absolute inset-x-0 top-60 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'>
             <div
               style={{
                 clipPath:
@@ -91,102 +176,22 @@ const Home = () => {
               className='relative left-[calc(50%-13rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]'
             />
           </div>
-        </section>
-      </div>
-
-
-      {/* Feature section */}
-      <div className='relative mx-auto mb-32 mt-32 max-w-5xl sm:mt-28'>
-        <div className='mb-12 px-6 lg:px-8'>
-          <div className='mx-auto max-w-2xl sm:text-center'>
-            <h2 className='mt-2 font-bold text-4xl text-gray-900 sm:text-5xl'>
-              Start chatting in minutes !
-            </h2>
-            <p className='mt-4 text-lg text-gray-600'>
-              Chatting to your PDF files has never been
-              easier than before.
-            </p>
-          </div>
-        </div>
-
-        {/* steps */}
-        <ol className='my-8 space-y-4 pt-8 md:flex md:space-x-12 md:space-y-0'>
-          <li className='md:flex-1'>
-            <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
-              <span className='bg-pink-100 text-pink-600 p-3 cursor-pointer w-fit rounded-xl'>
-                <CircleUserRound className='h-8 w-8' />
-              </span>
-              <span className='text-xl font-semibold'>
-                Sign up for an account
-              </span>
-              <span className='mt-2 text-zinc-700'>
-                Either starting out with a free plan or
-                choose our{' '}
-                <Link
-                  href='/pricing'
-                  className='text-pink-700 underline underline-offset-2'>
-                  pro plan
-                </Link>
-                .
-              </span>
-            </div>
-          </li>
-          <li className='md:flex-1'>
-            <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
-              <span className='bg-pink-100 text-pink-600 p-3 cursor-pointer w-fit rounded-xl'>
-                <UploadCloud className='h-8 w-8' />
-              </span>
-              <span className='text-xl font-semibold'>
-                Upload your PDF file
-              </span>
-              <span className='mt-2 text-zinc-700'>
-                We&apos;ll process your file and make it
-                ready for you to chat with.
-              </span>
-            </div>
-          </li>
-          <li className='md:flex-1'>
-            <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
-              <span className='bg-pink-100 text-pink-600 p-3 cursor-pointer w-fit rounded-xl'>
-                <MessagesSquare className='h-8 w-8' />
-              </span>
-              <span className='text-xl font-semibold'>
-                Start asking questions
-              </span>
-              <span className='mt-2 text-zinc-700'>
-                It&apos;s that simple. Try out EzRead today -
-                it really takes less than a minute.
-              </span>
-            </div>
-          </li>
-        </ol>
-        <div
-          aria-hidden='true'
-          className='pointer-events-none absolute inset-x-0 top-60 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'>
-          <div
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-            className='relative left-[calc(50%-13rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]'
-          />
-        </div>
-        <div className='mx-auto max-w-6xl px-6 lg:px-8'>
-          <div className='mt-16 flow-root sm:mt-24'>
-            <div className='-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4'>
-              <Image
-                src='/assets/file-upload-preview.png'
-                alt='uploading preview'
-                width={1419}
-                height={732}
-                quality={100}
-                className='rounded-md bg-white p-1 shadow-2xl ring-1 ring-gray-900/10'
-              />
+          <div className='mx-auto max-w-6xl px-6 lg:px-8'>
+            <div className='mt-16 flow-root sm:mt-24'>
+              <div className='-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4'>
+                <Image
+                  src='/assets/file-upload-preview.png'
+                  alt='uploading preview'
+                  width={1419}
+                  height={732}
+                  quality={100}
+                  className='rounded-md bg-white p-1 shadow-2xl ring-1 ring-gray-900/10'
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* <div
+          {/* <div
           aria-hidden='true'
           className='pointer-events-none absolute inset-x-0 bottom-10 -z-10 transform-gpu overflow-hidden blur-3xl sm:bottom-10'>
           <div
@@ -197,8 +202,8 @@ const Home = () => {
             className='relative left-[calc(50%-13rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]'
           />
         </div> */}
-      </div>
-
+        </div>
+      </MaxWidthWrapper>
 
       {/* testimonial */}
       <section id="testimonials" aria-label="What our customers are saying" className="relative bg-gray-50 py-20  sm:mt-28">
