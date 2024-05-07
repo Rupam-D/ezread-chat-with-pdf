@@ -45,7 +45,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="mt-8 sm:flex sm:items-center sm:justify-center lg:justify-start sm:space-x-5 lg:mt-12">
+                <div className=" z-50 mt-8 sm:flex sm:items-center sm:justify-center lg:justify-start sm:space-x-5 lg:mt-12">
                   <RegisterLink
                     className={buttonVariants({ variant: "default", size: "lg" })}>
                     Create Your Free Account

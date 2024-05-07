@@ -4,7 +4,7 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import MaxWidthWrapper from './MaxWidthWrapper'
 import Link from 'next/link'
 import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { ArrowRightIcon } from 'lucide-react';
+import { ArrowRightIcon, Gem } from 'lucide-react';
 import { buttonVariants } from './ui/button';
 import UserAccount from "./User-account";
 
@@ -33,9 +33,25 @@ const Navbar = () => {
             {/* Login Logout */}
             {
               user && user !== null ?
-                <UserAccount email={user.email || " "} imageUrl={user.picture || " "} name={!user.given_name || !user.family_name
-                  ? 'My Account'
-                  : `${user.given_name} ${user.family_name}`} />
+                <div className="flex items-center justify-center gap-4">
+                  <Link href={"/dashboard"} className={buttonVariants({
+                    variant: "ghost",
+                    size: "sm"
+                  })}>Dashboard</Link>
+
+                  <Link href='/pricing' className={buttonVariants({
+                    variant: "ghost",
+                    size: "sm"
+                  })}>
+                    Upgrade{' '}
+                    <Gem className='text-pink-600 h-4 w-4 ml-1.5' />
+                  </Link>
+
+                  <UserAccount email={user.email || " "} imageUrl={user.picture || " "} name={!user.given_name || !user.family_name
+                    ? 'My Account'
+                    : `${user.given_name} ${user.family_name}`} />
+                </div>
+
                 :
                 <div className="flex items-center justify-center gap-4">
                   <LoginLink className={buttonVariants({
